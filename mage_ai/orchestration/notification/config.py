@@ -8,13 +8,14 @@ from mage_ai.services.google_chat.config import GoogleChatConfig
 from mage_ai.services.opsgenie.config import OpsgenieConfig
 from mage_ai.services.slack.config import SlackConfig
 from mage_ai.services.teams.config import TeamsConfig
+from mage_ai.services.webhook.config import WebhookConfig
 from mage_ai.shared.config import BaseConfig
 
 
 class AlertOn(str, Enum):
-    PIPELINE_RUN_FAILURE = 'trigger_failure'
-    PIPELINE_RUN_SUCCESS = 'trigger_success'
-    PIPELINE_RUN_PASSED_SLA = 'trigger_passed_sla'
+    PIPELINE_RUN_FAILURE = "trigger_failure"
+    PIPELINE_RUN_SUCCESS = "trigger_success"
+    PIPELINE_RUN_PASSED_SLA = "trigger_passed_sla"
 
 
 DEFAULT_ALERT_ON = [
@@ -46,4 +47,5 @@ class NotificationConfig(BaseConfig):
     slack_config: SlackConfig = None
     teams_config: TeamsConfig = None
     discord_config: DiscordConfig = None
+    webhook_config: WebhookConfig = None
     message_templates: MessageTemplates = None

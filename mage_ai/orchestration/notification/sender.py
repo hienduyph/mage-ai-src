@@ -12,6 +12,7 @@ from mage_ai.services.google_chat.google_chat import send_google_chat_message
 from mage_ai.services.opsgenie.opsgenie import send_opsgenie_alert
 from mage_ai.services.slack.slack import send_slack_message
 from mage_ai.services.teams.teams import send_teams_message
+from mage_ai.services.webhook.webhook import send_webhook_message
 from mage_ai.settings import DEFAULT_LOCALHOST_URL, MAGE_PUBLIC_HOST
 
 DEFAULT_MESSAGES = dict(
@@ -83,6 +84,13 @@ class NotificationSender:
                 self.config.opsgenie_config,
                 message=title,
                 description=details or summary,
+            )
+
+        if self.config.webhook_config is not None and self.config.webhook_config.is_valid:
+            send_webhook_message(
+                self.config.webhook_config,
+                title=title,
+                message=details or summary,
             )
 
     def send_pipeline_run_success_message(self, pipeline, pipeline_run) -> None:
